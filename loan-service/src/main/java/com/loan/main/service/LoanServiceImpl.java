@@ -1,41 +1,42 @@
 package com.loan.main.service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.loan.main.constants.Constants;
 import com.loan.main.model.Loan;
-import com.loan.main.model.LoanApplication;
 import com.loan.main.repository.LoanRepository;
 
 @Service
 @Transactional
 public class LoanServiceImpl implements LoanService{
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoanServiceImpl.class);
 
 	@Autowired
 	private LoanRepository loanRepository;
 
 	@Override
-	public Loan applyForLoan(LoanApplication application) {
-
-		Loan loan = new Loan();
-		loan.setUserId(application.getUserId());
-		//loan.setLoanId(UUID.randomUUID());
-		loan.setTerm(application.getTerm());
-		loan.setPrinciple(application.getAmount());
-		loan.setRequestedDate(new Date());
+	public Loan applyForLoan(Loan loan) {
+		logger.info("LoanServiceImpl applyForLoan functionality ");
+		loan.setStatus(Constants.ACTIVE);
 		return loanRepository.save(loan);	
 	}
 
 	@Override
 	public List<Loan> getLoanHistory(Long userId) {
+		logger.info("LoanServiceImpl getLoanHistory functionality ");
         return loanRepository.findByUserId(userId);
     }
 
-	
-
+	@Override
+	public void deleteLoan(Long loanId) {
+		logger.info("LoanServiceImpl deleteLoan functionality ");
+		loanRepository.deleteById(loanId);
+	}
 }

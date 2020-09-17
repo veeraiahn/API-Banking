@@ -1,7 +1,6 @@
 package com.loan.main.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,71 +13,63 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Loan {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-
-	@Column
-	private Integer userId;
-
-	/*
-	 * @Column private UUID loanId;
-	 */
-
-	@Column
-	private Integer term;
-
-	@Column
-	private Long principle;
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date requestedDate;
-
-	
-	public Integer getId() {
-		return id;
+	public Long getLoan_id() {
+		return loan_id;
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public void setLoan_id(Long loan_id) {
+		this.loan_id = loan_id;
 	}
-
-	public Integer getUserId() {
-		return userId;
+	public Long getUser_id() {
+		return user_id;
 	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
 	}
-
-	/*
-	 * public UUID getLoanId() { return loanId; }
-	 * 
-	 * public void setLoanId(UUID loanId) { this.loanId = loanId; }
-	 */
 	public Integer getTerm() {
 		return term;
 	}
-
 	public void setTerm(Integer term) {
 		this.term = term;
 	}
-
-	public Long getPrinciple() {
-		return principle;
+	public Long getRequestedAmt() {
+		return requestedAmt;
 	}
-
-	public void setPrinciple(Long principle) {
-		this.principle = principle;
+	public void setRequestedAmt(Long requestedAmt) {
+		this.requestedAmt = requestedAmt;
 	}
-
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Date getRequestedDate() {
 		return requestedDate;
 	}
-
 	public void setRequestedDate(Date requestedDate) {
 		this.requestedDate = requestedDate;
 	}
-
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long loan_id;
+	@Column
+	private Long user_id;
+	@Column
+	private Integer term;
+	@Column
+	private Long requestedAmt;
+	@Column
+	private String type;
+	@Column
+	private String status;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date requestedDate;
+	
+	
 }
